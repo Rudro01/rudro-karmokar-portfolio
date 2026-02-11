@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rudro Karmokar | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 2px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .expandable-section {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .expandable-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .expandable-content.expanded {
+      max-height: 500px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-detail {
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      padding: 2px;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .project-detail-inner {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">RUDRO KARMOKAR</h1>
+        <p class="text-blue-600 font-medium">CSCAᵀᴹ Certified Professional</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="#projects" class="hidden md:inline px-4 py-2 text-gray-700 hover:text-blue-600">Projects</a>
+        <a href="#contact" class="hidden md:inline px-4 py-2 text-gray-700 hover:text-blue-600">Contact</a>
+        <a href="mailto:abirkarmokar01@gmail.com" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2.5 rounded-lg hover:opacity-90 transition duration-300 shadow-lg">
+          <i class="fas fa-envelope mr-2"></i>Get in Touch
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+      <!-- Profile Photo -->
+      <div class="w-full lg:w-2/5 flex justify-center">
+        <div class="relative">
+          <div class="w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+            <img src="https://i.ibb.co.com/DHJD6m7j/profile-jpg.jpg" alt="Rudro Karmokar" class="w-full h-full object-cover" 
+                 onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+          </div>
+          <div class="absolute -bottom-3 -right-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg">
+            CSCAᵀᴹ Certified
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="w-full lg:w-3/5">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          RUDRO KARMOKAR
+        </h1>
+        <div class="text-2xl gradient-text font-bold mb-6">
+          Electrical & Electronic Engineering • RUET
+        </div>
+        
+        <p class="text-lg leading-relaxed mb-8 text-gray-700">
+          Award-winning EEE undergraduate at RUET with proven leadership in technical organizations, international competition achievements, and CSCA™ certification. Experienced in embedded systems, IoT, FSO communication, and VLSI design.
+        </p>
+        
+        <div id="contact" class="bg-white p-6 rounded-2xl shadow-lg mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+              <i class="fas fa-envelope text-blue-600"></i>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Email</p>
+              <a href="mailto:abirkarmokar01@gmail.com" class="font-medium hover:text-blue-600">abirkarmokar01@gmail.com</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+              <i class="fas fa-phone text-green-600"></i>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Phone</p>
+              <a href="tel:+8801876074789" class="font-medium hover:text-green-600">+880-18760-74789</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+              <i class="fas fa-map-marker-alt text-purple-600"></i>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Location</p>
+              <p class="font-medium">Talaimari, Rajshahi, Bangladesh</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+              <i class="fab fa-linkedin text-red-600"></i>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/rudro-karmokar-csca%E2%84%A2-33a2111a4" target="_blank" class="font-medium hover:text-red-600">rudro-karmokar-csca™</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="#experience" class="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition duration-300 flex items-center gap-2 shadow-md">
+            <i class="fas fa-briefcase"></i> View Experience
+          </a>
+          <a href="#projects" class="px-6 py-3 border-2 border-gray-800 text-gray-800 rounded-lg hover:bg-gray-800 hover:text-white transition duration-300 flex items-center gap-2">
+            <i class="fas fa-code"></i> View Projects
+          </a>
+          <a href="mailto:abirkarmokar01@gmail.com" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:opacity-90 transition duration-300 flex items-center gap-2 shadow-md">
+            <i class="fas fa-paper-plane"></i> Contact Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Left Column -->
+    <div class="lg:col-span-2 space-y-8">
+      
+      <!-- Related Experience -->
+      <section id="experience" class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Related Experience</h2>
+        <div class="space-y-6">
+          <div class="expandable-section p-5 border-l-4 border-blue-500 bg-blue-50 rounded-r-lg" onclick="toggleExpand(this)">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-bold text-lg text-gray-900">Deputy Director of Startup Coordination</h4>
+                <p class="text-gray-600">HULT PRIZE at RUET</p>
+              </div>
+              <span class="text-gray-500 text-sm">12/2024 – 02/2025</span>
+            </div>
+            <div class="expandable-content mt-4">
+              <p class="text-gray-700">Led startup coordination initiatives for one of the world's largest social entrepreneurship competitions, managing teams and coordinating with stakeholders.</p>
+            </div>
+          </div>
+          
+          <div class="expandable-section p-5 border-l-4 border-green-500 bg-green-50 rounded-r-lg" onclick="toggleExpand(this)">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-bold text-lg text-gray-900">Business Development Intern</h4>
+                <p class="text-gray-600">Youth School for Social Entrepreneurs (YSSE)</p>
+              </div>
+              <span class="text-gray-500 text-sm">08/2023 – 12/2023</span>
+            </div>
+            <div class="expandable-content mt-4">
+              <p class="text-gray-700">Worked on business development strategies, market research, and social entrepreneurship initiatives for youth empowerment.</p>
+            </div>
+          </div>
+          
+          <div class="expandable-section p-5 border-l-4 border-purple-500 bg-purple-50 rounded-r-lg" onclick="toggleExpand(this)">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-bold text-lg text-gray-900">Public Relation Coordinator</h4>
+                <p class="text-gray-600">IEEE Computer Society Bangladesh Chapter</p>
+              </div>
+              <span class="text-gray-500 text-sm">06/2023 – 12/2023</span>
+            </div>
+            <div class="expandable-content mt-4">
+              <p class="text-gray-700">Managed public relations, communications, and networking for IEEE Computer Society activities across Bangladesh, organizing tech events and workshops.</p>
+            </div>
+          </div>
+          
+          <div class="expandable-section p-5 border-l-4 border-yellow-500 bg-yellow-50 rounded-r-lg" onclick="toggleExpand(this)">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-bold text-lg text-gray-900">Social Media Coordinator</h4>
+                <p class="text-gray-600">IEEE RUET Student Branch</p>
+              </div>
+              <span class="text-gray-500 text-sm">06/2023 – 12/2023</span>
+            </div>
+            <div class="expandable-content mt-4">
+              <p class="text-gray-700">Managed social media presence, content creation, and digital marketing for IEEE student chapter activities and events.</p>
+            </div>
+          </div>
+          
+          <div class="expandable-section p-5 border-l-4 border-red-500 bg-red-50 rounded-r-lg" onclick="toggleExpand(this)">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-bold text-lg text-gray-900">Graduate Fellow</h4>
+                <p class="text-gray-600">Bangladesh Youth Leadership Center (BYLC)</p>
+              </div>
+              <span class="text-gray-500 text-sm">08/2023 – 11/2023</span>
+            </div>
+            <div class="expandable-content mt-4">
+              <p class="text-gray-700">Completed intensive leadership training program focusing on ethical leadership, communication, and problem-solving skills.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Experience - UPDATED WITH BOTH PROJECTS -->
+      <section id="projects" class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Project Experience</h2>
+        <div class="space-y-6">
+          
+          <!-- Project 1: FSO Communication -->
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <h4 class="font-bold text-xl text-gray-900">Design & Implementation of Multi-Modal Free Space Optical Communication (FSO)</h4>
+                  <p class="text-gray-600 font-medium">Capstone Project I</p>
+                </div>
+                <span class="text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full">Dec 2025 – Jan 2026</span>
+              </div>
+              
+              <div class="mt-4">
+                <p class="text-gray-700 mb-4 leading-relaxed">
+                  <strong>Description:</strong> Designed and implemented a multi-modal FSO communication system transmitting analog and digital signals via laser and solar panel–based optical receiver, using optical modulation and OOK. Demonstrated high-speed, interference-free optical communication with potential applications in Li-Fi and secure RF-restricted environments.
+                </p>
+                
+                <div class="mb-4">
+                  <h5 class="font-semibold text-gray-800 mb-2">Key Features:</h5>
+                  <ul class="list-disc ml-5 text-gray-700 space-y-1">
+                    <li>Multi-modal signal transmission (analog & digital)</li>
+                    <li>Laser-based transmitter with solar panel receiver</li>
+                    <li>Optical modulation using OOK (On-Off Keying)</li>
+                    <li>High-speed, interference-free communication</li>
+                    <li>Potential applications in Li-Fi and secure environments</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-2">Technologies Used:</h5>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="badge bg-blue-100 text-blue-800">Optical Communication</span>
+                    <span class="badge bg-blue-100 text-blue-800">Laser Technology</span>
+                    <span class="badge bg-blue-100 text-blue-800">Signal Processing</span>
+                    <span class="badge bg-blue-100 text-blue-800">FSO</span>
+                    <span class="badge bg-blue-100 text-blue-800">Li-Fi</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Project 2: RFID Attendance System -->
+          <div class="project-detail">
+            <div class="project-detail-inner">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <h4 class="font-bold text-xl text-gray-900">ESP-32 Powered Real-Time RFID Attendance System with Cloud Integration</h4>
+                  <p class="text-gray-600 font-medium">Electronic Shop Practice Sessional Projects</p>
+                </div>
+                <span class="text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full">Academic Project</span>
+              </div>
+              
+              <div class="mt-4">
+                <p class="text-gray-700 mb-4 leading-relaxed">
+                  <strong>Description:</strong> Developed an Arduino-based RFID attendance system with real-time data logging to Google Sheets and a custom web app for visualization and management, demonstrating embedded systems and IoT integration skills.
+                </p>
+                
+                <div class="mb-4">
+                  <h5 class="font-semibold text-gray-800 mb-2">System Components:</h5>
+                  <ul class="list-disc ml-5 text-gray-700 space-y-1">
+                    <li>ESP-32 microcontroller with RFID reader module</li>
+                    <li>Real-time attendance tracking with timestamp</li>
+                    <li>Automatic data logging to Google Sheets</li>
+                    <li>Custom web dashboard for data visualization</li>
+                    <li>User management and reporting system</li>
+                  </ul>
+                </div>
+                
+                <div class="mb-4">
+                  <h5 class="font-semibold text-gray-800 mb-2">Key Achievements:</h5>
+                  <ul class="list-disc ml-5 text-gray-700 space-y-1">
+                    <li>Automated attendance system eliminating manual errors</li>
+                    <li>Cloud integration for remote data access</li>
+                    <li>Real-time notifications and reporting</li>
+                    <li>Cost-effective solution for educational institutions</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h5 class="font-semibold text-gray-800 mb-2">Technologies Used:</h5>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="badge bg-green-100 text-green-800">ESP-32</span>
+                    <span class="badge bg-green-100 text-green-800">RFID Technology</span>
+                    <span class="badge bg-green-100 text-green-800">Arduino</span>
+                    <span class="badge bg-green-100 text-green-800">IoT</span>
+                    <span class="badge bg-green-100 text-green-800">Google Sheets API</span>
+                    <span class="badge bg-green-100 text-green-800">Web Development</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Publications -->
+      <section class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Publications</h2>
+        <div class="p-5 border rounded-xl bg-gradient-to-r from-gray-50 to-white">
+          <h4 class="font-bold text-lg text-gray-900">Synthesis and Characterization of Ni-doped SnO₂ Nanoparticles Prepared by Sol-gel Method for Photocatalytic Treatment of Textile Wastewater</h4>
+          <p class="text-gray-600 mt-2"><i class="far fa-calendar-alt mr-2"></i>January 2026</p>
+          <p class="mt-4 text-gray-700 leading-relaxed">
+            Research focusing on nanomaterial synthesis and characterization for environmental remediation, analyzing photocatalytic efficiency in textile wastewater treatment applications. The study explores innovative approaches to water purification using advanced nanomaterials.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="badge bg-gray-200 text-gray-800">Nanomaterials</span>
+            <span class="badge bg-gray-200 text-gray-800">Photocatalysis</span>
+            <span class="badge bg-gray-200 text-gray-800">Environmental Science</span>
+            <span class="badge bg-gray-200 text-gray-800">Water Treatment</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Writing -->
+      <section class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Blog Writing</h2>
+        <div class="p-5 border rounded-xl bg-gradient-to-r from-yellow-50 to-white">
+          <h4 class="font-bold text-lg text-gray-900">Synergizing Supply Chains: A Hybrid Metaheuristic Framework for Efficient Automotive Parts Delivery with Customer Clustering</h4>
+          <p class="text-gray-600 mt-2"><i class="fas fa-pen-nib mr-2"></i>Society of Automotive Engineers RUET | December 2023</p>
+          <p class="mt-4 text-gray-700 leading-relaxed">
+            Explored innovative supply chain optimization techniques for automotive parts delivery systems using hybrid metaheuristic approaches and customer clustering algorithms to improve efficiency and reduce costs.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="badge bg-yellow-100 text-yellow-800">Supply Chain</span>
+            <span class="badge bg-yellow-100 text-yellow-800">Optimization</span>
+            <span class="badge bg-yellow-100 text-yellow-800">Logistics</span>
+            <span class="badge bg-yellow-100 text-yellow-800">Automotive</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column -->
+    <div class="space-y-8">
+      
+      <!-- Education -->
+      <section class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Education</h2>
+        <div class="space-y-6">
+          <div class="p-4 border rounded-xl bg-gradient-to-br from-blue-50 to-white">
+            <h4 class="font-bold text-lg text-gray-900">BSc in Electrical & Electronic Engineering</h4>
+            <p class="text-blue-600 font-medium">Rajshahi University of Engineering & Technology</p>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="text-gray-600">12/2022 – Present</span>
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-bold">CGPA: 3.68/4.00</span>
+            </div>
+            <p class="text-gray-600 text-sm mt-2">Currently in 3rd Year, 2nd Semester</p>
+          </div>
+          
+          <div class="p-4 border rounded-xl bg-gradient-to-br from-green-50 to-white">
+            <h4 class="font-bold text-lg text-gray-900">Higher Secondary Certificate</h4>
+            <p class="text-green-600 font-medium">Notre Dame College, Dhaka</p>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="text-gray-600">2019 – 2021</span>
+              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-bold">GPA: 5.00</span>
+            </div>
+            <p class="text-gray-600 text-sm mt-2">Science Group</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Skills -->
+      <section class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Technical Skills</h2>
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+              <i class="fas fa-code text-blue-500"></i>
+              Programming Languages
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge bg-blue-100 text-blue-800">C</span>
+              <span class="badge bg-blue-100 text-blue-800">MATLAB</span>
+              <span class="badge bg-blue-100 text-blue-800">Python</span>
+              <span class="badge bg-blue-100 text-blue-800">Simulink</span>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+              <i class="fas fa-tools text-green-500"></i>
+              Software & Tools
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge bg-green-100 text-green-800">Ansys Products</span>
+              <span class="badge bg-green-100 text-green-800">Ansys Lumerical</span>
+              <span class="badge bg-green-100 text-green-800">Microwind</span>
+              <span class="badge bg-green-100 text-green-800">Canva</span>
+              <span class="badge bg-green-100 text-green-800">MS Office Suite</span>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+              <i class="fas fa-microchip text-purple-500"></i>
+              Technical Expertise
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge bg-purple-100 text-purple-800">Embedded Systems</span>
+              <span class="badge bg-purple-100 text-purple-800">IoT</span>
+              <span class="badge bg-purple-100 text-purple-800">FSO Communication</span>
+              <span class="badge bg-purple-100 text-purple-800">VLSI Design</span>
+              <span class="badge bg-purple-100 text-purple-800">RFID Technology</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Honors & Awards -->
+      <section class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Honors & Awards</h2>
+        <div class="space-y-5">
+          <div class="p-4 border rounded-xl bg-gradient-to-r from-yellow-50 to-white hover:shadow-md transition">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-trophy text-yellow-500"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Gold Winner</h4>
+                <p class="text-gray-700">The University Physics Competition 2025</p>
+                <p class="text-gray-600 text-xs mt-1">First RUET team to win gold in competition's 16-year history</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border rounded-xl bg-gradient-to-r from-blue-50 to-white hover:shadow-md transition">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-award text-blue-500"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">70% Scholarship Winner</h4>
+                <p class="text-gray-700">ISCEA Global Supply Chain Case Competition 2024</p>
+                <p class="text-gray-600 text-xs mt-1">Earned CSCA™ certification with 90% score</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border rounded-xl bg-gradient-to-r from-amber-50 to-white hover:shadow-md transition">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-medal text-amber-500"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Bronze Winner</h4>
+                <p class="text-gray-700">International Astronomy & Astrophysics Competition 2024</p>
+                <p class="text-gray-600 text-xs mt-1">International recognition in scientific competition</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leadership Experience -->
+      <section class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+        <h2 class="text-2xl font-bold mb-6 section-title">Leadership Experience</h2>
+        <div class="space-y-5">
+          <div class="p-4 border rounded-xl bg-gradient-to-r from-indigo-50 to-white hover:shadow-md transition">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-user-graduate text-indigo-500"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Class Representative</h4>
+                <p class="text-gray-600">Rajshahi University of Engineering & Technology</p>
+                <p class="text-gray-500 text-xs mt-2">12/2022 – 09/2025</p>
+                <p class="text-gray-700 text-sm mt-2">Coordinated academic communication between faculty and 80+ students, organized departmental programs including Alumni Meet and EEE Annual Program.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border rounded-xl bg-gradient-to-r from-purple-50 to-white hover:shadow-md transition">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-bullhorn text-purple-500"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Campus Ambassador</h4>
+                <p class="text-gray-600">ISCEA Bangladesh & The Daily Star Campus</p>
+                <p class="text-gray-700 text-sm mt-2">Liaised with event organizers and industry professionals, promoted events, handled inquiries, and strengthened stakeholder communication.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <h3 class="text-2xl font-bold">RUDRO KARMOKAR</h3>
+          <p class="text-gray-400 mt-2">Electrical & Electronic Engineering • RUET</p>
+          <p class="text-blue-400 font-medium">CSCAᵀᴹ Certified Professional</p>
+        </div>
+        
+        <div class="flex flex-col items-center md:items-end">
+          <div class="flex space-x-6 mb-6">
+            <a href="mailto:abirkarmokar01@gmail.com" class="text-gray-300 hover:text-white transition text-xl" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rudro-karmokar-csca%E2%84%A2-33a2111a4" target="_blank" class="text-gray-300 hover:text-white transition text-xl" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="tel:+8801876074789" class="text-gray-300 hover:text-white transition text-xl" title="Call">
+              <i class="fas fa-phone"></i>
+            </a>
+            <a href="#projects" class="text-gray-300 hover:text-white transition text-xl" title="Projects">
+              <i class="fas fa-code"></i>
+            </a>
+          </div>
+          <a href="mailto:abirkarmokar01@gmail.com" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition duration-300 shadow-lg">
+            <i class="fas fa-paper-plane mr-2"></i>Contact for Opportunities
+          </a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-10 pt-8 text-center text-gray-400 text-sm">
+        <p>© 2026 Rudro Karmokar | Portfolio Website</p>
+        <p class="mt-2">Rajshahi University of Engineering & Technology (RUET) | BSc in Electrical & Electronic Engineering</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Expandable sections functionality
+    function toggleExpand(element) {
+      const content = element.querySelector('.expandable-content');
+      content.classList.toggle('expanded');
+      
+      // Close other expanded sections in the same parent
+      const parent = element.parentElement;
+      const allSections = parent.querySelectorAll('.expandable-section');
+      allSections.forEach(section => {
+        if (section !== element) {
+          section.querySelector('.expandable-content').classList.remove('expanded');
+        }
+      });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Add hover effect to all cards
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add animation to badges on hover
+      const badges = document.querySelectorAll('.badge');
+      badges.forEach(badge => {
+        badge.addEventListener('mouseenter', () => {
+          badge.style.transform = 'scale(1.05)';
+        });
+        badge.addEventListener('mouseleave', () => {
+          badge.style.transform = 'scale(1)';
+        });
+      });
+      
+      // Add click effect to project details
+      const projectDetails = document.querySelectorAll('.project-detail');
+      projectDetails.forEach(project => {
+        project.addEventListener('mouseenter', () => {
+          project.style.transform = 'translateY(-5px)';
+        });
+        project.addEventListener('mouseleave', () => {
+          project.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
